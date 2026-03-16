@@ -1,3 +1,4 @@
+// วาง URL ของ Web App Google Apps Script ที่นี่
 const API_URL = "https://script.google.com/macros/s/AKfycbxbEwGdAbrcXmtlKKZQ19iZ5i5izSHMKEi5b1ZCTKfI2xT24Ng3oXSpEZU2sGmiCvHYHA/exec";
 
 const pinOverlay = document.getElementById('pin-overlay');
@@ -6,8 +7,8 @@ const pinInput = document.getElementById('pin-input');
 const btnLogin = document.getElementById('btn-login');
 const loginError = document.getElementById('login-error');
 const statStudents = document.getElementById('stat-students');
+const statDepts = document.getElementById('stat-depts');
 
-// 1. ตรวจสอบสถานะการเข้าสู่ระบบเมื่อเปิดหน้า
 document.addEventListener("DOMContentLoaded", () => {
     const isAuth = sessionStorage.getItem('teacher_auth');
     if (isAuth === 'true') {
@@ -15,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// 2. ฟังก์ชันล็อกอิน
 async function handleLogin() {
     const pin = pinInput.value;
     if (pin.length < 4) return;
@@ -46,7 +46,6 @@ async function handleLogin() {
     }
 }
 
-// 3. แสดงหน้า Dashboard และโหลดข้อมูลสถิติ
 function showDashboard() {
     pinOverlay.classList.add('hidden');
     mainContent.classList.remove('hidden');
@@ -61,14 +60,20 @@ async function loadQuickStats() {
         });
         const result = await response.json();
         if (result.status === 'success') {
-            statStudents.innerText = result.data.length;
+            const students = result.data;
+            // นับจำนวนนักเรียนทั้งหมด
+            statStudents.innerText = students.length;
+            
+            // กรองและนับจำนวนแผนกที่ไม่ซ้ำกัน
+            const uniqueDepts = new Set(students.map(s => s.department).filter(Boolean));
+            statDepts.innerText = uniqueDepts.size;
         }
     } catch (e) {
-        statStudents.innerText = "Error";
+        statStudents.innerText = "Err";
+        statDepts.innerText = "Err";
     }
 }
 
-// 4. ออกจากระบบ
 function logout() {
     sessionStorage.removeItem('teacher_auth');
     location.reload();
