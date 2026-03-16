@@ -1,0 +1,40 @@
+/* นำเข้าฟอนต์ Prompt จาก Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Prompt', sans-serif;
+}
+
+/* ปรับแต่งกรอบของตัวสแกน QR Code */
+#reader-container {
+    width: 100%;
+    min-height: 280px;
+    border-radius: 0.75rem; /* 12px */
+    overflow: hidden;
+    background-color: #f8fafc; /* slate-50 */
+    border: 2px dashed #cbd5e1; /* slate-300 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#reader {
+    width: 100%;
+}
+
+/* บังคับให้วิดีโอจากกล้องแสดงผลเต็มกรอบพอดี */
+#reader video {
+    object-fit: cover !important;
+    border-radius: 0.75rem;
+}
+
+/* ซ่อน UI ดั้งเดิมของ html5-qrcode ที่เราไม่ต้องการ (เช่น ปุ่มลบๆ ที่ติดมากับไลบรารี) */
+#reader__dashboard_section_swaplink {
+    display: none !important;
+}
+#reader__dashboard_section_csr span {
+    display: none !important;
+}
+#reader__dashboard_section_csr button {
+    display: none !important;
+}
