@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Assignments - Student Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Prompt', sans-serif; }</style>
+</head>
+<body class="bg-slate-50 min-h-screen pb-10">
+
+    <nav class="bg-white shadow-sm border-b border-slate-200 p-4 sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="text-slate-500 hover:text-blue-600 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                </a>
+                <h1 class="text-xl font-bold text-slate-800">จัดการชิ้นงาน/การเก็บคะแนน</h1>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-5xl mx-auto p-4 md:p-6 mt-4">
+        
+        <div class="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 mb-8">
+            <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-fuchsia-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+                สร้างชิ้นงานใหม่
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">รหัสงาน (ID)</label>
+                    <input type="text" id="assign-id" placeholder="เช่น HW-01" class="w-full px-4 py-3 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">เลือกวิชา</label>
+                    <select id="assign-subject" class="w-full px-4 py-3 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition">
+                        <option value="">กำลังโหลดวิชา...</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">ชื่องาน/แบบฝึกหัด</label>
+                    <input type="text" id="assign-name" placeholder="เช่น แบบฝึกหัดบทที่ 1" class="w-full px-4 py-3 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600 mb-1">คะแนนเต็ม</label>
+                    <input type="number" id="assign-score" placeholder="เช่น 10" class="w-full px-4 py-3 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition">
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button id="btn-add-assign" class="w-full md:w-auto px-8 py-3 bg-fuchsia-600 text-white rounded-xl font-semibold hover:bg-fuchsia-700 shadow-md transition">
+                    บันทึกชิ้นงาน
+                </button>
+            </div>
+        </div>
+
+        <h2 class="text-lg font-bold text-slate-800 mb-4 px-2">ชิ้นงานทั้งหมดในระบบ</h2>
+        <div class="bg-white rounded-3xl shadow-sm overflow-hidden border border-slate-200">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left min-w-max">
+                    <thead class="bg-slate-100 border-b border-slate-200">
+                        <tr>
+                            <th class="px-6 py-4 text-sm font-semibold text-slate-600">รหัสงาน</th>
+                            <th class="px-6 py-4 text-sm font-semibold text-slate-600">วิชา</th>
+                            <th class="px-6 py-4 text-sm font-semibold text-slate-600">ชื่องาน</th>
+                            <th class="px-6 py-4 text-sm font-semibold text-slate-600 text-center">คะแนนเต็ม</th>
+                            <th class="px-6 py-4 text-sm font-semibold text-slate-600 text-center">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assign-list-body" class="divide-y divide-slate-100">
+                        <tr><td colspan="5" class="px-6 py-8 text-center text-slate-500">กำลังโหลดข้อมูล...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="manage-assignments.js"></script>
+</body>
+</html>
