@@ -17,25 +17,32 @@
 <body class="min-h-screen">
 
     <div id="pin-overlay" class="fixed inset-0 bg-slate-900/95 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300">
-        <div class="max-w-sm w-full bg-white rounded-[2rem] shadow-2xl p-8 text-center transform transition-all scale-100">
+        <div class="max-w-sm w-full bg-white rounded-[2rem] shadow-2xl p-8 text-center transform transition-all scale-100 relative">
+            
             <div class="mb-6">
                 <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                 </div>
                 <h2 class="text-3xl font-extrabold text-slate-800 tracking-tight">Teacher Login</h2>
-                <p class="text-slate-500 text-sm mt-2">กรุณาระบุ PIN 4 หลักเพื่อเข้าใช้งาน</p>
+                <p class="text-slate-500 text-sm mt-2">สำหรับอาจารย์ผู้สอนเท่านั้น</p>
             </div>
             
             <input type="password" id="pin-input" maxlength="4" inputmode="numeric" 
-                   class="w-full text-center text-4xl tracking-[1rem] py-4 border-2 border-slate-100 bg-slate-50 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all mb-6 font-mono"
+                   class="w-full text-center text-4xl tracking-[1rem] py-4 border-2 border-slate-100 bg-slate-50 rounded-2xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all mb-4 font-mono"
                    placeholder="****">
             
-            <button id="btn-login" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg hover:bg-blue-700 active:scale-95 transition-all shadow-lg hover:shadow-blue-500/30">
-                เข้าสู่ระบบ
+            <button id="btn-login" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg hover:bg-blue-700 active:scale-95 transition-all shadow-lg hover:shadow-blue-500/30 mb-2">
+                เข้าสู่ระบบ (ครู)
             </button>
-            <p id="login-error" class="text-red-500 text-sm mt-4 hidden font-medium animate-pulse">รหัส PIN ไม่ถูกต้อง ลองใหม่อีกครั้ง</p>
+            <p id="login-error" class="text-red-500 text-sm mb-4 hidden font-medium animate-pulse">รหัส PIN ไม่ถูกต้อง ลองใหม่อีกครั้ง</p>
+
+            <div class="mt-6 pt-6 border-t border-slate-100">
+                <p class="text-xs text-slate-400 mb-3 font-medium">สำหรับนักเรียน</p>
+                <a href="check-grade.html" class="block w-full py-3 bg-sky-50 text-sky-600 border border-sky-100 rounded-2xl font-bold hover:bg-sky-100 hover:text-sky-700 transition-all">
+                    👉 เช็คคะแนน / สถานะการส่งงาน
+                </a>
+            </div>
+
         </div>
     </div>
 
@@ -50,9 +57,7 @@
                     </div>
                 </div>
                 <button onclick="logout()" class="p-3 text-slate-400 hover:text-red-600 transition bg-slate-50 rounded-full hover:bg-red-50 active:scale-90" title="ออกจากระบบ">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
                 </button>
             </div>
         </header>
@@ -84,14 +89,11 @@
             </div>
 
             <h2 class="text-xl font-extrabold text-slate-800 mb-6 px-2 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
                 เมนูการใช้งานหลัก
             </h2>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                
                 <a href="scanner.html" class="menu-card bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center gap-5 hover:border-blue-200">
                     <div class="icon-container w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>
@@ -168,6 +170,16 @@
                     <div>
                         <h3 class="font-bold text-slate-800 text-lg">จัดการชิ้นงาน</h3>
                         <p class="text-xs text-slate-500 mt-1 font-medium">ตั้งค่าคะแนนเต็มงาน</p>
+                    </div>
+                </a>
+
+                <a href="grade-report.html" class="menu-card bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md hover:border-teal-200">
+                    <div class="icon-container w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800">Grade Report</h3>
+                        <p class="text-xs text-slate-500 mt-1">สรุปเกรด / โหลด Excel</p>
                     </div>
                 </a>
             </div>
